@@ -4,7 +4,7 @@
         <input v-model="name" type="text" placeholder="Название варенья">  
         <input v-model="value" type="number" placeholder="Введите объём варенья">
         <div class="buttons">
-            <button type="submit" @click="createBank">Добавить варенье</button>
+            <button type="submit" @click="createJam">Добавить варенье</button>
             <button @click="clearList">Очистить список</button>
         </div>    
     </div>
@@ -20,12 +20,18 @@ export default {
     }
   }, 
   methods:{
-      createBank(){
-          var currentJam = {name: this.name, value: this.value};
+      createJam(){
+          if(this.value < 0){
+              this.value = -this.value
+          }
+          var currentJam = {name: this.name, value: parseInt(this.value)};
           this.jams.push(currentJam);
 
           localStorage["Jams"] = JSON.stringify(this.jams);          
           console.log(localStorage["Jams"])
+          
+          this.name = '',
+          this.value = ''
       },
       clearList(){
           this.jams = []

@@ -23,11 +23,17 @@ export default {
   }, 
   methods:{
       createBank(){
-          var currentBank = {name: this.name, value: this.value, jamType: '', fullness: 0};
+          if(this.value < 0){
+              this.value = -this.value
+          }
+          var currentBank = {name: this.name, value: parseInt(this.value), jamType: '', fullness: 0};
           this.banks.push(currentBank);
 
           localStorage["Banks"] = JSON.stringify(this.banks);          
           console.log(localStorage["Banks"])
+
+          this.name = '',
+          this.value = ''
       },
       clearList(){
           this.banks = []

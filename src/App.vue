@@ -19,8 +19,8 @@ export default {
     Distribute
   },
   mounted(){
-     localStorage["Jams"] = JSON.stringify(this.jams);          
-     localStorage["Banks"] = JSON.stringify(this.banks);          
+     localStorage["Jams"] = null;          
+     localStorage["Banks"] = null;          
   }
 }
 </script>
