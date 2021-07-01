@@ -24,11 +24,24 @@ export default {
           if(this.value < 0){
               this.value = -this.value
           }
-          var currentJam = {name: this.name, value: parseInt(this.value)};
-          this.jams.push(currentJam);
 
-          localStorage["Jams"] = JSON.stringify(this.jams);          
-          console.log(localStorage["Jams"])
+          var existingJam = this.jams.filter((jam) => {
+            return jam.name === this.name.trim();
+          });  
+
+          if (existingJam.length > 0){
+              var index = this.jams.indexOf(existingJam[0])
+              this.jams[index].value += parseInt(this.value);
+
+              localStorage["Jams"] = JSON.stringify(this.jams); 
+              console.log(localStorage["Jams"])
+          }else{
+              var currentJam = {name: this.name.trim(), value: parseInt(this.value)};
+              this.jams.push(currentJam);
+
+              localStorage["Jams"] = JSON.stringify(this.jams);          
+              console.log(localStorage["Jams"])
+          }
           
           this.name = '',
           this.value = ''
